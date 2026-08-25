@@ -39,10 +39,10 @@ class LnkdList {
     
     public void print(){
         Student current = this.head;
-        do {
+        while(current !=null) {
             System.out.println(current.name + " - " + current.score);
             current = current.next;
-        } while(current.next !=null);
+        } 
     }
 }
 
@@ -50,9 +50,9 @@ class LnkdList {
 public class Pruebalinkedlist {
     public static void main(String[] args) {
         LnkdList lista = new LnkdList();
-        lista.add("Airam",99);
+        lista.add("Juanpi",99);
         lista.add("Uriel", 88);
-        lista.add("Juanpi", 81);
+        lista.add("Andreschan", 81);
         System.out.println("agregados.");
         
         lista.print();
