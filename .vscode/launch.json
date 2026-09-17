@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "towerofhanoi",
+            "request": "launch",
+            "mainClass": "TowerOfHanoi.towerofhanoi",
+            "projectName": "Fundamentos_3_4c7a6659"
+        },
+        {
+            "type": "java",
             "name": "Rover",
             "request": "launch",
             "mainClass": "Rover.Rover",
