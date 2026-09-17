@@ -3,9 +3,12 @@ package Rover;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.ArrayDeque;
 
 public class Rover {
     public static void main(String[] args) {
@@ -13,6 +16,11 @@ public class Rover {
         ArrayList<String> lineas = leerArchivos(cadena);
         Queue<String> queue = addToQueue(lineas);
         travelQueue(queue);
+        queue = addToQueue(lineas);
+        Deque<String> stack = queueToStack(queue);
+        
+        Queue<String> reversedQueue = stackToQueue(stack);
+        travelQueue(reversedQueue);
     }
     public static Queue<String> addToQueue(ArrayList<String> lineas) {
         Queue<String> queue = new LinkedList<>();
@@ -35,6 +43,7 @@ public class Rover {
                 }
             }
         }
+        System.out.println(); 
     }
 
     public static ArrayList<String> leerArchivos(String nombreArchivo) {
@@ -48,6 +57,28 @@ public class Rover {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
         return lineas;
+    }
+
+    public static Deque<String> queueToStack(Queue<String> queue) {
+        Deque<String> deque = new ArrayDeque<>();
+        while (!queue.isEmpty()) {
+            String linea = queue.poll();
+            if (linea != null) {
+                deque.push(linea);
+            }
+        }
+        return deque;
+    }
+
+    public static Queue<String> stackToQueue(Deque<String> stack) {
+        Queue<String> queue = new LinkedList<>();
+        while (!stack.isEmpty()) {
+            String linea = stack.pop();
+            if (linea != null) {
+                queue.add(linea);
+            }
+        }
+        return queue;
     }
     
 }
