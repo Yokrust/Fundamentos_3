@@ -59,10 +59,38 @@ public class towerofhanoi {
     }
     private static void jugarManual(){
         inicializaTorres();
-        do {
+        while(numDiscos > torres[2].size()){
             despliegaTorres();
-            System.out.println("Ingrese la torre a jugar");
-        } while (true);
+            System.out.println("Ingrese la torre del origen (A, B, C): ");
+            String origen = eligeTorre("Ingrese la torre de origen (A, B, C): ");
+            String destino = eligeTorre("Ingrese la torre de destino (A, B, C): ");
+            int torreOrigen = origen.charAt(0) - 'A';
+            int torreDestino = destino.charAt(0) - 'A';
+            if (torres[torreOrigen].isEmpty()) {
+                System.out.println("La torre de origen está vacía. Intenta de nuevo.");
+                continue;
+            }
+            if (torres[torreDestino].isEmpty()) {
+                System.out.println("La torre de destino está vacía. Intenta de nuevo.");
+                continue;
+            }
+            if (torreOrigen == torreDestino) {
+                System.out.println("La torre de origen y destino son la misma. Intenta de nuevo.");
+                continue;
+            }
+            moverDisco(torreOrigen, torreDestino);
+        }
+        System.out.println("¡Felicidades! Has completado el juego.");
+    }
+    private static boolean moverDisco(int origen, int destino) {
+        if(!torres[origen].isEmpty() && (torres[destino].isEmpty() || torres[origen].peek() < torres[destino].peek())) {
+            int disco = torres[origen].pop();
+            torres[destino].push(disco);
+            return true;
+        } else {
+            System.out.println("Movimiento inválido. Intenta de nuevo.");
+            return false;
+        }
     }
     public static String eligeTorre(String mensaje){
         String torre;
