@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Recursividad",
+            "request": "launch",
+            "mainClass": "Recursividad.Recursividad",
+            "projectName": "Fundamentos_3_4c7a6659"
+        },
+        {
+            "type": "java",
             "name": "towerofhanoi",
             "request": "launch",
             "mainClass": "TowerOfHanoi.towerofhanoi",
