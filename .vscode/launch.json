@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "grafos",
+            "request": "launch",
+            "mainClass": "Grafos.grafos",
+            "projectName": "Fundamentos_3_4c7a6659"
+        },
+        {
+            "type": "java",
             "name": "Recursividad",
             "request": "launch",
             "mainClass": "Recursividad.Recursividad",
