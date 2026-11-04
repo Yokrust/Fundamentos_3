@@ -1,4 +1,5 @@
-graph G{Angel--JoseLuis[label="1"]
+graph G{
+    Angel--JoseLuis[label="1"]
 Angel--Dylan[label="2"]
 JoseLuis--Dylan[label="2"]
 Dylan--Jorge[label="2"]

@@ -21,7 +21,7 @@ class GrafoArrays {
             }
             int llave = arista.indexOf('[');
             if (llave >= 0) {
-                arista = arista.substring(llave + 1).trim();
+                arista = arista.substring(0, llave);
             }
             String[] extremos = arista.split("--", 2);
             if (extremos.length == 2) {
@@ -34,7 +34,7 @@ class GrafoArrays {
              // Cada linea se separa en dos vértices y un peso, luego se llama al método agregarArista para agregarlas a la matriz de adyacencia
     }
 
-    private void populateMatrizAdyacencia(String origen) {
+    public void populateMatrizAdyacencia(String origen) {
         String[] lineas = origen.split("\\R");
         for (String linea : lineas) {
             String arista = linea.trim();
@@ -83,6 +83,7 @@ if (etiqueta >= 0) {
         System.out.println("Matriz de adyacencia:");
         System.out.print("\t");
         for (int i = 0; i < numVertices; i++) {
+            String vertice = vertices[i];
             System.out.print(vertices[i] + "\t");
         }
         System.out.println();
@@ -142,6 +143,7 @@ public class grafos {
         String texto = cargaArchivo("/Users/yael/Documents/Fundamentos3/Fundamentos_3/Grafos/grafos.txt");
         System.out.println("Contenido del archivo:\n" + texto);
         GrafoArrays grafo = new GrafoArrays(texto);
+        grafo.populateMatrizAdyacencia(texto);
         grafo.display();
     }
     public static String cargaArchivo(String ruta) {
