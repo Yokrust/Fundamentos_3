@@ -136,15 +136,47 @@ if (etiqueta >= 0) {
             System.out.println("Arista agregada: " + vertice1 + " -- " + vertice2 + " (peso: " + peso + ")");
         }
     }
+    public void DFS(String verticeInicial, String VerticeFinal){
+        boolean[] visitado = new boolean[numVertices];
+        int indiceInicial = obtenerIndiceVertice(verticeInicial);
+        int indiceFinal = obtenerIndiceVertice(VerticeFinal);
+        if (indiceInicial == -1 || indiceFinal == -1) {
+            System.out.println("Uno o ambos vértices no existen en el grafo.");
+            return;
+        }
+        System.out.println("Recorrido DFS desde " + verticeInicial + " hasta " + VerticeFinal + ":");
+        java.util.Stack<Integer> stack = new java.util.Stack<>();
+        stack.push(indiceInicial);
+        while (!stack.isEmpty()) {
+            int indiceActual = stack.pop();
+            if (!visitado[indiceActual]) {
+                visitado[indiceActual] = true;
+                System.out.print(vertices[indiceActual] + " ");
+                if (indiceActual == indiceFinal) {
+                    System.out.println("\nSe ha alcanzado el vértice final: " + VerticeFinal);
+                    return;
+                }
+            }
+            //agregar vecinos no visitados al stack
+            for (int i = numVertices - 1; i >= 0; i--) {
+                if (matrizAdyacencia[indiceActual][i] != 0 && !visitado[i]) {
+                    stack.push(i);
+                }
+            }
+        }
+
+    }
 }
 
 public class grafos {
     public static void main(String[] args) {
-        String texto = cargaArchivo("/Users/yael/Documents/Fundamentos3/Fundamentos_3/Grafos/grafos.txt");
+        String texto = cargaArchivo("/Users/yael/Documents/Fundamentos3/Fundamentos_3/Grafos/grafo_salon2.txt");
         System.out.println("Contenido del archivo:\n" + texto);
         GrafoArrays grafo = new GrafoArrays(texto);
         grafo.populateMatrizAdyacencia(texto);
         grafo.display();
+        grafo.DFS("Zahid", "Jose");
+        grafo.DFS("Jose", "Zahid");
     }
     public static String cargaArchivo(String ruta) {
         String contenido = "";
