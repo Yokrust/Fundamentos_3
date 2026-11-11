@@ -241,6 +241,57 @@ if (etiqueta >= 0) {
         return -1;
     }
 
+    public String caminoMasCortoBFS(String verticeInicial, String verticeFinal){
+        int inicio = obtenerIndiceVertice(verticeInicial);
+        int destino = obtenerIndiceVertice(verticeFinal);
+        if(inicio == -1 || destino == -1){
+            System.out.println("Uno o ambos vértices no existen en el grafo.");
+            return null;
+        }
+        int[] distancia = new int[numVertices];
+        int[] anterior = new int[numVertices];
+        boolean[] visitado = new boolean[numVertices];
+        java.util.Arrays.fill(distancia, Integer.MAX_VALUE);
+        java.util.Arrays.fill(anterior, -1);
+        distancia[inicio] = 0;
+        for(int paso = 0; paso < numVertices; paso ++){
+            int actual = -1;
+            for(int i = 0; i < numVertices; i++){
+                if(!visitado[i] && distancia[i] != Integer.MAX_VALUE && (actual == -1 || distancia[i] < distancia[actual])){
+                    actual = i;
+                }
+            }
+            if(actual == -1){
+                break;
+            }
+            if(actual == destino){
+                break;
+            }
+            visitado[actual] = true;
+            for(int vecino = 0; vecino < numVertices; vecino++){
+                int peso = matrizAdyacencia[actual][vecino];
+                if(peso != 0 && !visitado[vecino] && distancia[actual] <= Integer.MAX_VALUE - peso){
+                    int nuevaDistancia = distancia[actual] + peso;
+                    if(nuevaDistancia < distancia[vecino]){
+                        distancia[vecino] = nuevaDistancia;
+                        anterior[vecino] = actual;
+                    }
+                }
+            }
+        }
+        if(distancia[destino] == Integer.MAX_VALUE){
+            System.out.println("No hay camino desde " + verticeInicial + " hasta " + verticeFinal);
+            return null;
+        }
+        java.util.List<String> camino = new java.util.ArrayList<>();
+        int actual = destino;
+        while(actual != -1){
+            camino.add(vertices[actual]);
+            actual = anterior[actual];
+        }
+        return "el camino mas corto de " + verticeInicial + " hasta " + verticeFinal + " es: " + camino.toString();
+    }
+
     public void despliegaArcos() {
         System.out.println("Arcos recorridos en DFS:");
         if (arcosDFS != null) {
@@ -264,6 +315,7 @@ if (etiqueta >= 0) {
                 }
             }
         }
+
 
         System.out.println("Número total de vértices: " + numVertices);
         System.out.println("Número total de arcos posibles: " + totalArcosPosibles);
